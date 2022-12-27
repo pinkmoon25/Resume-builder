@@ -1,9 +1,10 @@
-import BasicDetails from "./components/BasicDetailsForm";
+import ResumeForm from './components/ResumeForm';
+
 
 function App() {
   return (
     <div className="App">
-      <BasicDetails />
+      <ResumeForm />
     </div>
   );
 }
