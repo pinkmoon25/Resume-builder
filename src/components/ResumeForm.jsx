@@ -1,40 +1,70 @@
-import {
-  Box,
-  Button,
-  HStack,
-  VStack,
-  Center,
-  Heading,
-  Progress,
-} from "@chakra-ui/react";
-import React from "react";
+import { EditIcon } from "@chakra-ui/icons";
+import { Box, VStack, Center, Heading, Progress } from "@chakra-ui/react";
+import React, { useState } from "react";
 import BasicDetails from "./BasicDetailsForm";
 import EduacationDetails from "./EducationDetails";
 import ProfessionalDetails from "./ProfessionalDetailsForm";
+import ResumeTemplate from "./ResumeTemplate";
 
 const ResumeForm = () => {
   const [page, setPage] = React.useState(0);
+
+  const initialState = {
+    profile: {
+      firstname: "",
+      lastname: "",
+      phone: "",
+      email: "",
+      linkedin: "",
+      github: "",
+      website: "",
+      address: "",
+    },
+    professional: {
+      summary: "",
+      skills: "",
+      work: [],
+    },
+    education: [],
+    certification: [],
+  };
+
+  const [resumeInfo, setResumeInfo] = useState(initialState);
+
   const formPage = [
     "Profile Details",
     "Professional Experience",
     "Educational Details",
   ];
-  const nextPage = () => {
-    setPage((page) => page + 1);
-  };
-
-  const prevPage = () => {
-    setPage((page) => page - 1);
-  };
 
   const renderForm = () => {
     switch (page) {
       case 0:
-        return <BasicDetails />;
+        return (
+          <BasicDetails
+            resumeInfo={resumeInfo}
+            setResumeInfo={setResumeInfo}
+            setPage={setPage}
+          />
+        );
       case 1:
-        return <ProfessionalDetails />;
+        return (
+          <ProfessionalDetails
+            resumeInfo={resumeInfo}
+            setResumeInfo={setResumeInfo}
+            setPage={setPage}
+          />
+        );
       case 2:
-        return <EduacationDetails />;
+        return (
+          <EduacationDetails
+            resumeInfo={resumeInfo}
+            setResumeInfo={setResumeInfo}
+            setPage={setPage}
+          />
+        );
+        case 3:
+          return (<ResumeTemplate resumeInfo={resumeInfo} />)
       default:
         return;
     }
@@ -42,32 +72,19 @@ const ResumeForm = () => {
 
   return (
     <VStack justify="center" spacing={4}>
-      <Heading p={4}>Build your Resume</Heading>
+      <Heading p={4}>Build Your Resume <EditIcon boxSize={8} /></Heading>
       <Box w="60%">
-        <Progress value={page === 0 ? 33.3 : page === 1 ? 66.6 : 100} />
+        <Progress
+          colorScheme="green"
+          value={page === 0 ? 33.3 : page === 1 ? 66.6 : 100}
+        />
       </Box>
       <Center>
-        <Box bg="cornflowerblue" p={8} color="white" borderRadius="lg">
+        <Box p={8} borderRadius="lg" fontFamily="Poppins, sans-serif">
           <Center>
             <Heading mb={4}>{formPage[page]}</Heading>
           </Center>
           {renderForm()}
-          <HStack spacing={4} justify="space-between" mt={4}>
-            <Button
-              onClick={prevPage}
-              isDisabled={page === 0}
-              colorScheme="blue"
-            >
-              Prev
-            </Button>
-            <Button
-              onClick={nextPage}
-              isDisabled={page === 2}
-              colorScheme="blue"
-            >
-              Next
-            </Button>
-          </HStack>
         </Box>
       </Center>
     </VStack>
