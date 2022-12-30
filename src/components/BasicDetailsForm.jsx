@@ -1,5 +1,7 @@
+import { AddIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Button,
+  Center,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -10,25 +12,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import React from "react";
-import {IoIosAddCircle} from 'react-icons/io';
 
-const BasicDetails = () => {
-  const [addressSection, setAddressSection] = React.useState([]);
+const BasicDetails = (props) => {
+  const { resumeInfo, setResumeInfo, setPage } = props;
 
-  const createAddressSection = () => {
-    setAddressSection(
-      addressSection.concat(
-        <FormControl>
-          <FormLabel>Address: </FormLabel>
-          <Input
-            type="text"
-            placeholder="city, state, country"
-            _placeholder={{ opacity: 0.8, color: "white" }}
-          />
-        </FormControl>
-      )
-    );
-  };
+  const [addressSection, setAddressSection] = React.useState(false);
 
   return (
     <Stack>
@@ -38,7 +26,15 @@ const BasicDetails = () => {
           <Input
             type="text"
             placeholder="Your first name"
-            _placeholder={{ opacity: 0.8, color: "white" }}
+            value={resumeInfo.profile.firstname}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                firstname: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
           />
         </FormControl>
         <FormControl>
@@ -46,7 +42,15 @@ const BasicDetails = () => {
           <Input
             type="text"
             placeholder="Your last name"
-            _placeholder={{ opacity: 0.8, color: "white" }}
+            value={resumeInfo.profile.lastname}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                lastname: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
           />
         </FormControl>
         <FormControl>
@@ -58,7 +62,18 @@ const BasicDetails = () => {
               placeholder="phone number"
               maxLength={10}
               pattern="[0-9]{10}"
-              _placeholder={{ opacity: 0.8, color: "white" }}
+              value={resumeInfo.profile.phone}
+              onChange={(e) => {
+                const updateValue = {
+                  ...resumeInfo.profile,
+                  phone: e.target.value,
+                };
+                const updateResumeInfo = {
+                  ...resumeInfo,
+                  profile: updateValue,
+                };
+                setResumeInfo(updateResumeInfo);
+              }}
             />
           </InputGroup>
         </FormControl>
@@ -67,7 +82,15 @@ const BasicDetails = () => {
           <Input
             type="email"
             placeholder="Your email address"
-            _placeholder={{ opacity: 0.8, color: "white" }}
+            value={resumeInfo.profile.email}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                email: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
           />
           <FormHelperText>
             Enter email address to get contacted for jobs
@@ -79,7 +102,15 @@ const BasicDetails = () => {
             type="url"
             placeholder="https://example.com"
             pattern="https://.*"
-            _placeholder={{ opacity: 0.8, color: "white" }}
+            value={resumeInfo.profile.linkedin}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                linkedin: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
           />
         </FormControl>
         <FormControl>
@@ -88,7 +119,15 @@ const BasicDetails = () => {
             type="url"
             placeholder="https://example.com"
             pattern="https://.*"
-            _placeholder={{ opacity: 0.8, color: "white" }}
+            value={resumeInfo.profile.github}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                github: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
           />
         </FormControl>
         <FormControl>
@@ -97,20 +136,56 @@ const BasicDetails = () => {
             type="url"
             placeholder="https://example.com"
             pattern="https://.*"
-            _placeholder={{ opacity: 0.8, color: "white" }}
+            value={resumeInfo.profile.website}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                website: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
           />
         </FormControl>
-        {addressSection}
+        <FormControl style={{ display: addressSection ? "block" : "none" }}>
+          <FormLabel>Address: </FormLabel>
+          <Input
+            type="text"
+            placeholder="city, country"
+            value={resumeInfo.profile.address}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                address: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
+          />
+        </FormControl>
       </SimpleGrid>
       <Button
         colorScheme="green"
-        onClick={createAddressSection}
-        isDisabled={addressSection.length}
+        onClick={() => {
+          setAddressSection(!addressSection);
+        }}
+        isDisabled={addressSection}
         w="max-content"
-        rightIcon={<IoIosAddCircle/>}
+        rightIcon={<AddIcon />}
       >
         Add Address
       </Button>
+      <Center mt={8}>
+        <Button
+          colorScheme="whatsapp"
+          onClick={() => {
+            setPage((p) => p + 1);
+          }}
+          rightIcon={<ChevronRightIcon />}
+        >
+          Save
+        </Button>
+      </Center>
     </Stack>
   );
 };
