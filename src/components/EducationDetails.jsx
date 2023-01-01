@@ -6,7 +6,7 @@ import {
   Stack,
   FormControl,
   Input,
-  Center,
+  HStack,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -28,17 +28,22 @@ const EduacationDetails = (props) => {
     details: "",
   });
 
-  React.useEffect(() => {
-    saveEducationData();
-  }, [educationSection.length]);
-
-  React.useEffect(() => {
-    saveCertificateData();
-  }, [certificateSection.length]);
-
   const saveEducationData = () => {
     const isEmpty = Object.values(educationData).some((x) => x === "");
     if (isEmpty) return;
+
+    const duplicate = () => {
+      let arr = resumeInfo.education;
+      for (let i = 0; i < arr.length; i++) {
+        if (JSON.stringify(arr[i]) === JSON.stringify(educationData)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (duplicate()) return;
+
     const updateValue = {
       ...resumeInfo,
       education: resumeInfo.education.concat(educationData),
@@ -47,14 +52,35 @@ const EduacationDetails = (props) => {
   };
 
   const saveCertificateData = () => {
-    const isEmpty = Object.values(certificateData).some((x) => x === "");
+    const isEmpty = Object.values(certificateData).some((x) => x.trim() === "");
     if (isEmpty) return;
+
+    const duplicate = () => {
+      let arr = resumeInfo.certification;
+      for (let i = 0; i < arr.length; i++) {
+        if (JSON.stringify(arr[i]) === JSON.stringify(certificateData)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (duplicate()) return;
+
     const updateValue = {
       ...resumeInfo,
       certification: resumeInfo.certification.concat(certificateData),
     };
     setResumeInfo(updateValue);
   };
+
+  React.useEffect(() => {
+    saveEducationData();
+  }, [educationSection.length]);
+
+  React.useEffect(() => {
+    saveCertificateData();
+  }, [certificateSection.length]);
 
   const createCertificateSection = () => {
     setCertificateSection(
@@ -189,12 +215,14 @@ const EduacationDetails = (props) => {
             }}
           />
         </FormControl>
-        {educationSection}
-        {certificateSection}
       </SimpleGrid>
+      {educationSection}
+      {certificateSection}
       <Button
         colorScheme="whatsapp"
-        onClick={createEducationSection}
+        onClick={() => {
+          createEducationSection();
+        }}
         w="max-content"
         rightIcon={<AddIcon />}
       >
@@ -202,15 +230,18 @@ const EduacationDetails = (props) => {
       </Button>
       <Button
         colorScheme="whatsapp"
-        onClick={createCertificateSection}
+        onClick={() => {
+          saveEducationData();
+          createCertificateSection();
+        }}
         w="max-content"
         rightIcon={<AddIcon />}
       >
         Add Certificates
       </Button>
-      <Center mt={8}>
+      <HStack spacing={8} justify="center">
         <Button
-          colorScheme="teal"
+          colorScheme="blue"
           onClick={() => {
             setPage((p) => p - 1);
           }}
@@ -230,7 +261,7 @@ const EduacationDetails = (props) => {
         >
           Save & Submit
         </Button>
-      </Center>
+      </HStack>
     </Stack>
   );
 };
