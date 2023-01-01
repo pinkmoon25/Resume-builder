@@ -1,10 +1,11 @@
 import { AddIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Button,
-  Center,
   FormControl,
+  FormHelperText,
   FormLabel,
   GridItem,
+  HStack,
   Input,
   SimpleGrid,
   Stack,
@@ -26,8 +27,20 @@ const ProfessionalDetails = (props) => {
   });
 
   const saveData = () => {
-    const isEmpty = Object.values(workData).some((x) => x === "");
+    const isEmpty = Object.values(workData).some((x) => x.trim() === "");
     if (isEmpty) return;
+
+    const duplicate = () => {
+      let arr = resumeInfo.professional.work;
+      for (let i = 0; i < arr.length; i++) {
+        if (JSON.stringify(arr[i]) === JSON.stringify(workData)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (duplicate()) return;
 
     const updatedValue = {
       ...resumeInfo.professional,
@@ -37,7 +50,6 @@ const ProfessionalDetails = (props) => {
       ...resumeInfo,
       professional: updatedValue,
     };
-    console.log(workData);
     setResumeInfo(updateResumeInfo);
   };
 
@@ -104,6 +116,7 @@ const ProfessionalDetails = (props) => {
                 }));
               }}
             />
+            <FormHelperText>Hit enter for newline</FormHelperText>
           </FormControl>
         </GridItem>
       </SimpleGrid>
@@ -132,8 +145,7 @@ const ProfessionalDetails = (props) => {
       </FormControl>
       <FormControl>
         <FormLabel>Skills:</FormLabel>
-        <Input
-          type="text"
+        <Textarea
           placeholder="Communication, Teambuilding, etc.."
           value={resumeInfo.professional.skills}
           onChange={(e) => {
@@ -148,6 +160,7 @@ const ProfessionalDetails = (props) => {
             setResumeInfo(updateResumeInfo);
           }}
         />
+        <FormHelperText>Hit enter for newline</FormHelperText>
       </FormControl>
       {workSection}
       <Button
@@ -158,9 +171,9 @@ const ProfessionalDetails = (props) => {
       >
         Add Work Experience
       </Button>
-      <Center mt={8}>
+      <HStack spacing={8} justify="center">
         <Button
-          colorScheme="teal"
+          colorScheme="blue"
           onClick={() => {
             setPage((p) => p - 1);
           }}
@@ -172,14 +185,13 @@ const ProfessionalDetails = (props) => {
           colorScheme="whatsapp"
           onClick={() => {
             saveData();
-            console.log(resumeInfo);
             setPage((p) => p + 1);
           }}
           rightIcon={<ChevronRightIcon />}
         >
           Save
         </Button>
-      </Center>
+      </HStack>
     </Stack>
   );
 };
