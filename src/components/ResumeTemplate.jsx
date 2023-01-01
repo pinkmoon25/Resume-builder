@@ -33,7 +33,6 @@ const ResumeTemplate = (props) => {
             <HStack
               justify="center"
               wrap="wrap"
-              maxW="50%"
               divider={<StackDivider borderColor="gray.500" />}
             >
               {resumeInfo.profile.email.length ? (
@@ -43,7 +42,7 @@ const ResumeTemplate = (props) => {
                   color="blue.500"
                 >
                   {" "}
-                  Email{" "}
+                  {resumeInfo.profile.email}{" "}
                 </Link>
               ) : null}
               {resumeInfo.profile.linkedin.length ? (
@@ -173,7 +172,14 @@ const ResumeTemplate = (props) => {
         ) : null}
       </Stack>
       <HStack divider={<StackDivider />} pt="24px">
-        <Button w="max-content" colorScheme="blue" isDisabled={page !== 3}>
+        <Button
+          w="max-content"
+          colorScheme="blue"
+          isDisabled={page !== 3}
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
           Create New
         </Button>
         <div>
