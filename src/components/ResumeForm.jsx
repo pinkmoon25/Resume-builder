@@ -78,33 +78,33 @@ const ResumeForm = () => {
 
   return (
     <Stack>
-      <HStack p={4} spacing={3} align="baseline" justify="center">
+      <Center style={{ display: page === 3 ? "none" : "flex" }}>
+      <Heading p={4}>
+        Build Your Resume <EditIcon boxSize={8} />
+      </Heading>
+      <Box w="60%" borderRadius="lg">
+        <Progress
+          colorScheme="whatsapp"
+          value={page === 0 ? 33.3 : page === 1 ? 66.6 : 100}
+        />
+      </Box>
+      </Center>
+      <HStack p={4} spacing={3} align="stretch" justify="center">
         <VStack
           justify="center"
           spacing={4}
           width="50%"
           style={{ display: page === 3 ? "none" : "block" }}
         >
-          <Heading p={4}>
-            Build Your Resume <EditIcon boxSize={8} />
-          </Heading>
-          <Box w="60%">
-            <Progress
-              colorScheme="green"
-              value={page === 0 ? 33.3 : page === 1 ? 66.6 : 100}
-            />
+          <Box p={8} borderRadius="lg" bg="gray.900" color="white" boxShadow='xl' rounded='md'>
+            <Center>
+              <Heading mb={4}>{formPage[page]}</Heading>
+            </Center>
+            {renderForm()}
           </Box>
-          <Center>
-            <Box p={8} borderRadius="lg" bg="gray.900" color="white">
-              <Center>
-                <Heading mb={4}>{formPage[page]}</Heading>
-              </Center>
-              {renderForm()}
-            </Box>
-          </Center>
         </VStack>
         <VStack style={{ width: page === 3 ? "80%" : "50%" }}>
-          <ResumeTemplate resumeInfo={resumeInfo} />
+          <ResumeTemplate resumeInfo={resumeInfo} page={page} />
         </VStack>
       </HStack>
     </Stack>
