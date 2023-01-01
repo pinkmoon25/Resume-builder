@@ -63,7 +63,7 @@ const ProfessionalDetails = (props) => {
 
   const workExperienceForm = () => {
     return (
-      <SimpleGrid spacing={4} columns={[1, 1, 2]} key={workSection.length}>
+      <SimpleGrid spacing={4} columns={[1, 1, 1, 2]} key={workSection.length}>
         <FormControl>
           <FormLabel>Job Title: </FormLabel>
           <Input
@@ -105,7 +105,7 @@ const ProfessionalDetails = (props) => {
           />
           <FormHelperText>write present if ongoing</FormHelperText>
         </FormControl>
-        <GridItem colSpan={2}>
+        <GridItem colSpan={[1, 1, 1, 2]}>
           <FormControl>
             <FormLabel>JOb Details:</FormLabel>
             <Textarea

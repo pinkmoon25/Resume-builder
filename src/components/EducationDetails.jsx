@@ -117,7 +117,11 @@ const EduacationDetails = (props) => {
   };
 
   const educationForm = () => (
-    <SimpleGrid spacing={4} columns={[1, 1, 2]} key={educationSection.length}>
+    <SimpleGrid
+      spacing={4}
+      columns={[1, 1, 1, 2]}
+      key={educationSection.length}
+    >
       <FormControl>
         <FormLabel>College/University or School: </FormLabel>
         <Input
@@ -167,7 +171,7 @@ const EduacationDetails = (props) => {
 
   return (
     <Stack>
-      <SimpleGrid spacing={4} columns={[1, 1, 2]}>
+      <SimpleGrid spacing={4} columns={[1, 1, 1, 2]}>
         <FormControl>
           <FormLabel>College/University or School: </FormLabel>
           <Input

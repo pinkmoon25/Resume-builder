@@ -20,7 +20,7 @@ const BasicDetails = (props) => {
 
   return (
     <Stack>
-      <SimpleGrid columns={[1, 1, 2]} spacing={4} placeItems="center">
+      <SimpleGrid columns={[1, 1, 1, 2]} spacing={4} placeItems="center">
         <FormControl>
           <FormLabel>First name:</FormLabel>
           <Input
@@ -56,7 +56,7 @@ const BasicDetails = (props) => {
         <FormControl>
           <FormLabel>Phone Number:</FormLabel>
           <InputGroup>
-            <InputLeftAddon children="+91" color="blue.600" />
+            <InputLeftAddon children="+" color="blue.600" />
             <Input
               type="tel"
               placeholder="phone number"
