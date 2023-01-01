@@ -7,6 +7,7 @@ import {
   FormControl,
   Input,
   HStack,
+  FormHelperText,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -140,8 +141,8 @@ const EduacationDetails = (props) => {
       <FormControl>
         <FormLabel>Start date: </FormLabel>
         <Input
-          type="month"
-          placeholder="Enter in format YYYY-MM"
+          type="text"
+          placeholder="Enter start date or year jan 2022"
           onChange={(e) => {
             setEducationData((prev) => ({
               ...prev,
@@ -153,12 +154,13 @@ const EduacationDetails = (props) => {
       <FormControl>
         <FormLabel>End date: </FormLabel>
         <Input
-          type="month"
-          placeholder="Enter in format YYYY-MM"
+          type="text"
+          placeholder="Enter end date or year march 2022"
           onChange={(e) => {
             setEducationData((prev) => ({ ...prev, endDate: e.target.value }));
           }}
         />
+        <FormHelperText>write present if ongoing</FormHelperText>
       </FormControl>
     </SimpleGrid>
   );
@@ -192,8 +194,8 @@ const EduacationDetails = (props) => {
         <FormControl>
           <FormLabel>Start date: </FormLabel>
           <Input
-            type="month"
-            placeholder="Enter in format YYYY-MM"
+            type="text"
+            placeholder="Enter start date or year jan 2022"
             onChange={(e) => {
               setEducationData((prev) => ({
                 ...prev,
@@ -205,8 +207,8 @@ const EduacationDetails = (props) => {
         <FormControl>
           <FormLabel>End date: </FormLabel>
           <Input
-            type="month"
-            placeholder="Enter in format YYYY-MM"
+            type="text"
+            placeholder="Enter end date or year march 2022"
             onChange={(e) => {
               setEducationData((prev) => ({
                 ...prev,
@@ -214,6 +216,7 @@ const EduacationDetails = (props) => {
               }));
             }}
           />
+          <FormHelperText>write present if ongoing</FormHelperText>
         </FormControl>
       </SimpleGrid>
       {educationSection}

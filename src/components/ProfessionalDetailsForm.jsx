@@ -87,8 +87,8 @@ const ProfessionalDetails = (props) => {
         <FormControl>
           <FormLabel>Start date: </FormLabel>
           <Input
-            type="month"
-            placeholder="Enter in format YYYY-MM"
+            type="text"
+            placeholder="Enter start date jan 2022"
             onChange={(e) => {
               setWorkData((prev) => ({ ...prev, startDate: e.target.value }));
             }}
@@ -97,12 +97,13 @@ const ProfessionalDetails = (props) => {
         <FormControl>
           <FormLabel>End date: </FormLabel>
           <Input
-            type="month"
-            placeholder="Enter in format YYYY-MM"
+            type="text"
+            placeholder="Enter end date jan 2023"
             onChange={(e) => {
               setWorkData((prev) => ({ ...prev, endDate: e.target.value }));
             }}
           />
+          <FormHelperText>write present if ongoing</FormHelperText>
         </FormControl>
         <GridItem colSpan={2}>
           <FormControl>
