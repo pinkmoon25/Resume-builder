@@ -1,5 +1,13 @@
 import { EditIcon } from "@chakra-ui/icons";
-import { Box, VStack, Center, Heading, Progress } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  Center,
+  Heading,
+  Progress,
+  Stack,
+  HStack,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import BasicDetails from "./BasicDetailsForm";
 import EduacationDetails from "./EducationDetails";
@@ -63,31 +71,43 @@ const ResumeForm = () => {
             setPage={setPage}
           />
         );
-        case 3:
-          return (<ResumeTemplate resumeInfo={resumeInfo} />)
       default:
         return;
     }
   };
 
   return (
-    <VStack justify="center" spacing={4}>
-      <Heading p={4}>Build Your Resume <EditIcon boxSize={8} /></Heading>
-      <Box w="60%">
-        <Progress
-          colorScheme="green"
-          value={page === 0 ? 33.3 : page === 1 ? 66.6 : 100}
-        />
-      </Box>
-      <Center>
-        <Box p={8} borderRadius="lg" fontFamily="Poppins, sans-serif">
+    <Stack>
+      <HStack p={4} spacing={3} align="baseline" justify="center">
+        <VStack
+          justify="center"
+          spacing={4}
+          width="50%"
+          style={{ display: page === 3 ? "none" : "block" }}
+        >
+          <Heading p={4}>
+            Build Your Resume <EditIcon boxSize={8} />
+          </Heading>
+          <Box w="60%">
+            <Progress
+              colorScheme="green"
+              value={page === 0 ? 33.3 : page === 1 ? 66.6 : 100}
+            />
+          </Box>
           <Center>
-            <Heading mb={4}>{formPage[page]}</Heading>
+            <Box p={8} borderRadius="lg" bg="gray.900" color="white">
+              <Center>
+                <Heading mb={4}>{formPage[page]}</Heading>
+              </Center>
+              {renderForm()}
+            </Box>
           </Center>
-          {renderForm()}
-        </Box>
-      </Center>
-    </VStack>
+        </VStack>
+        <VStack style={{ width: page === 3 ? "80%" : "50%" }}>
+          <ResumeTemplate resumeInfo={resumeInfo} />
+        </VStack>
+      </HStack>
+    </Stack>
   );
 };
 
