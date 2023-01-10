@@ -79,7 +79,7 @@ const ResumeForm = () => {
   };
 
   return (
-    <Stack>
+    <Stack mb="50px">
       <Center
         style={{ display: page === 3 ? "none" : "flex" }}
         w="100%"
