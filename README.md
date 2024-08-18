@@ -1,10 +1,6 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # Resume Ready
 
-A web app to create a well formatted resume in minutes. you can also download your resume in pdf format or print it.
+A user-friendly resume builder application developed using React and Chakra UI. Create a professional resume in three easy steps. Customize, print, and download your resume at any time with ease.
 
 ## Built With
 
